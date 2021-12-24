@@ -6,7 +6,7 @@
 /*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:09:07 by ababa             #+#    #+#             */
-/*   Updated: 2021/12/24 17:02:15 by ababa            ###   ########.fr       */
+/*   Updated: 2021/12/24 17:23:20 by ababa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 {
-	int		storage[5];
+	char	storage[5];
 	int		i;
 	int		j;
 	
 	i = 1;
-	storage[0] = 0;
-	storage[1] = 0;
-	storage[2] = 0;
-	storage[3] = 0;
+	storage[0]='\0';
+	storage[1]='\0';
+	storage[2]='\0';
+	storage[3]='A';
 
 	str = NULL;
 	while (d_ptr[i])
@@ -31,11 +31,11 @@ void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 		while (i < count_y && j < count_x)
 		{
 			if (d_ptr[i][j] == 'E')
-				storage[0] = 1;
+				storage[0] = 'E';
 			else if (d_ptr[i][j] == 'P')
 			{
 				storage[1] = 'P';
-
+				storage[3] += 1;
 			}
 			else if (d_ptr[i][j] == 'C')
 				storage[2] = 'C';
@@ -49,7 +49,7 @@ void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 		i++;
 	}
 	storage[4] = '\0';
-	if (ft_strcmp(storage, "EPC") != 0)
+	if (ft_strcmp(storage, "EPCB") != 0)
 	{
 		ft_putstr("Invalid map, please check your elements!");
 		exit(1);
