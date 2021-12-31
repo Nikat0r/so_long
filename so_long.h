@@ -20,10 +20,15 @@
 #include <stdlib.h>
 #include "get_next_line/get_next_line.h"
 
+typedef struct{
+	void	*mlx;
+	void	*win;
+	void	*img;
+}	t_vars;
 void	ft_putchar(char	c);
 void	ft_putstr(char	*str);
 char	*ft_strrchr(const char *str, int c);
-int		ft_strcmp(const char *s1, const char *s2);
+int	ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char *s, char c);
 
 #endif

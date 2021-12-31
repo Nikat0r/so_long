@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
+static void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 {
 	char	storage[5];
 	int		i;
@@ -24,7 +24,8 @@ void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 	storage[2]='\0';
 	storage[3]='A';
 
-	str = NULL;
+	//silencing the warning
+	//free(str);
 	while (d_ptr[i])
 	{
 		j = 1;
@@ -54,9 +55,10 @@ void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 		ft_putstr("Invalid map, please check your elements!");
 		exit(1);
 	}
+	map_parsing(d_ptr, count_y, count_x);
 }
 
-void	map_border_check(char	**d_ptr, char	*str, int count_y, int count_x)
+static void	map_border_check(char	**d_ptr, char	*str, int count_y, int count_x)
 {
 	int	i;
 	int	j;
@@ -85,7 +87,7 @@ void	map_border_check(char	**d_ptr, char	*str, int count_y, int count_x)
 	map_element_check(d_ptr, str, count_y, count_x);
 }
 
-void	map_rect_check(char	*str)
+static void	map_rect_check(char	*str)
 {
 	size_t	x1;
 	size_t	x2;
@@ -99,6 +101,7 @@ void	map_rect_check(char	*str)
 	ptr = ft_strrchr(str, '\n');
 	while (ptr[x2] != '\0')
 		x2++;
+	//x2 predecremented to account for the \n character!
 	if (x1 != --x2)
 	{
 		ft_putstr("Invalid map, please submit a rectangular map!");
@@ -121,6 +124,7 @@ void	map_rect_check(char	*str)
 		exit(1);
 	}
 	map_border_check(d_ptr, str, --x1, x2);
+	//x1 predecremented because it's gonna be used as an index!
 }
 
 int	main(int argc, char *argv[])

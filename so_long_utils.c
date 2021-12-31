@@ -12,6 +12,15 @@
 
 #include "so_long.h"
 
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 void	ft_putchar(char	c)
 {
 	write (1, &c, 1);
