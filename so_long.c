@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
+static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 {
 	char	storage[5];
 	int		i;
@@ -24,8 +24,6 @@ static void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 	storage[2]='\0';
 	storage[3]='A';
 
-	//silencing the warning
-	//free(str);
 	while (d_ptr[i])
 	{
 		j = 1;
@@ -58,7 +56,7 @@ static void	map_element_check(char	**d_ptr, char	*str, int count_y, int count_x)
 	map_parsing(d_ptr, count_y, count_x);
 }
 
-static void	map_border_check(char	**d_ptr, char	*str, int count_y, int count_x)
+static void	map_border_check(char	**d_ptr, int count_y, int count_x)
 {
 	int	i;
 	int	j;
@@ -67,11 +65,11 @@ static void	map_border_check(char	**d_ptr, char	*str, int count_y, int count_x)
 	j = 0;
 	while (d_ptr[i])
 	{
-		while ((i == 0 || i == count_y) && j < count_x)
+		while ((i == 0 || i == (count_y - 1)) && j < count_x)
 		{
 			if (d_ptr[i][j] != '1')
 			{
-				ft_putstr("Invalid map, please close your map!");
+				ft_putstr("Invalid map, please close your map!\n");
 				exit(1);
 			}
 			j++;
@@ -79,12 +77,12 @@ static void	map_border_check(char	**d_ptr, char	*str, int count_y, int count_x)
 		j = 0;
 		if ((d_ptr[i][0] != '1') || (d_ptr[i][count_x - 1] != '1'))
 		{
-			ft_putstr("Invalid map, please close your map!");
+			ft_putstr("Invalid map, please close your map!\n");
 			exit(1);
 		}
 		i++;
 	}
-	map_element_check(d_ptr, str, count_y, count_x);
+	map_element_check(d_ptr, count_y, count_x);
 }
 
 static void	map_rect_check(char	*str)
@@ -123,7 +121,7 @@ static void	map_rect_check(char	*str)
 		ft_putstr("Your map is square shaped, please submit a rectangular map!");
 		exit(1);
 	}
-	map_border_check(d_ptr, str, --x1, x2);
+	map_border_check(d_ptr, x1, x2);
 	//x1 predecremented because it's gonna be used as an index!
 }
 
