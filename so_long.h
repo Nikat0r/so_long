@@ -18,7 +18,7 @@
 #include <unistd.h>
 #include <mlx.h>
 #include <stdlib.h>
-#include "get_next_line/get_next_line.h"
+
 typedef struct{
 	int	i;
 	int	j;
@@ -28,20 +28,12 @@ typedef struct{
 }	t_player;
 
 typedef struct{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-	void	*img;
-}	t_enemy;
-typedef struct{
 	void	*mlx;
 	void	*win;
 	void	*img;
 	void	*backg;
 	char	**d_ptr;
 	int	counter;
-	t_enemy enemy;
 	t_player player;	
 }	t_vars;
 
@@ -51,6 +43,7 @@ typedef struct{
 }	t_cords;
 
 void	ft_putchar(char	c);
+size_t	ft_strlen(const char *str);
 void	ft_putstr(char	*str);
 char	*ft_strrchr(const char *str, int c);
 int	ft_strcmp(const char *s1, const char *s2);

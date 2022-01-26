@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static int	enemy_movement(t_vars *vars)
+/*static int	enemy_movement(t_vars *vars)
 {
 	int	height;
 	int	width;
@@ -39,7 +39,7 @@ static int	enemy_movement(t_vars *vars)
 	}
 	//mlx_loop(vars->mlx);
 	return 0;
-}
+}*/
 void	map_parsing(char **d_ptr, int count_y, int count_x)
 {
 	t_vars		vars;
@@ -52,8 +52,6 @@ void	map_parsing(char **d_ptr, int count_y, int count_x)
 
 	i = 0;
 	cords.y = 0;
-	//Including d_ptr in vars to be able to pass it to wasd_hook.
-	vars.d_ptr = d_ptr;
 	vars.mlx = mlx_init();
 	vars.backg = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Floor.xpm", &img_width, &img_height);
 	vars.win = mlx_new_window(vars.mlx, count_x * img_width, count_y * img_height, "so_long");
@@ -81,24 +79,18 @@ void	map_parsing(char **d_ptr, int count_y, int count_x)
 			else if (d_ptr[i][j] == 'C')
 			{
 				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Sword.xpm", &img_width, &img_height);
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.backg, cords.x, cords.y);
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
 			}
 			else if (d_ptr[i][j] == 'X')
 			{
-				vars.enemy.i = i;
-				vars.enemy.j = j;
-				vars.enemy.x = cords.x;
-				vars.enemy.y = cords.y;
-				mlx_expose_hook(vars.win, enemy_movement, &vars);
-				//enemy_movement(vars, cords, i, j);
+				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/enemy/1.xpm", &img_width, &img_height);
+				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
 			}
 			else if (d_ptr[i][j] == 'P')
 			{
 				vars.player.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Knight.xpm", &img_width, &img_height);
 				vars.player.j = j;
 				vars.player.i = i;
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.backg, cords.x, cords.y);
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.player.img, cords.x, cords.y);
 				vars.player.player_x = cords.x;
 				vars.player.player_y = cords.y;
@@ -111,5 +103,6 @@ void	map_parsing(char **d_ptr, int count_y, int count_x)
 	}
 	//passing by reference to change the actual values of the player info to account for the wasd_hook function!
 	//Including d_ptr in vars to be able to pass it to wasd_hook.
+	vars.d_ptr = d_ptr;
 	player_hooking(&vars);
 }
