@@ -28,12 +28,20 @@ typedef struct{
 }	t_player;
 
 typedef struct{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+	void	*img;
+}	t_enemy;
+typedef struct{
 	void	*mlx;
 	void	*win;
 	void	*img;
 	void	*backg;
 	char	**d_ptr;
 	int	counter;
+	t_enemy enemy;
 	t_player player;	
 }	t_vars;
 

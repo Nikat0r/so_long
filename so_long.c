@@ -14,15 +14,17 @@
 
 static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 {
-	char	storage[5];
+	char	storage[7];
 	int		i;
 	int		j;
 	
 	i = 1;
-	storage[0]='\0';
-	storage[1]='\0';
-	storage[2]='\0';
-	storage[3]='A';
+	storage[0] = '\0';
+	storage[1] = '\0';
+	storage[2] = '\0';
+	storage[3] = '\0';
+	storage[4] = 'A';
+	storage[5] = 'A';
 
 	while (d_ptr[i])
 	{
@@ -34,10 +36,15 @@ static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 			else if (d_ptr[i][j] == 'P')
 			{
 				storage[1] = 'P';
-				storage[3] += 1;
+				storage[4] += 1;
+			}
+			else if (d_ptr[i][j] == 'X')
+			{
+				storage[2] = 'X';
+				storage[5] += 1;
 			}
 			else if (d_ptr[i][j] == 'C')
-				storage[2] = 'C';
+				storage[3] = 'C';
 			else if (d_ptr[i][j] != '1' && d_ptr[i][j] != '0')
 			{
 				ft_putstr("Invalid map, your map contains wrong elements!");
@@ -47,8 +54,8 @@ static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 		}
 		i++;
 	}
-	storage[4] = '\0';
-	if (ft_strcmp(storage, "EPCB") != 0)
+	storage[6] = '\0';
+	if (ft_strcmp(storage, "EPXCBB") != 0)
 	{
 		ft_putstr("Invalid map, please check your elements!");
 		exit(1);

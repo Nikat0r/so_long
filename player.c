@@ -42,7 +42,6 @@ static int	wasd_hook(int key, t_vars *vars)
 			//Replacing every collectible with a floor symbol to help with checking for collectibles for the collectible_check function.
 			if (vars->d_ptr[vars->player.i - 1][vars->player.j] == 'C')
 				vars->d_ptr[vars->player.i - 1][vars->player.j] = '0';
-			vars->player.i -= 1;
 			mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 			vars->player.player_y -= 24;
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
@@ -53,6 +52,7 @@ static int	wasd_hook(int key, t_vars *vars)
 		}	
 		if (vars->d_ptr[vars->player.i - 1][vars->player.j] == 'E' && collectible_check(vars->d_ptr) == 1)
 			exit(1);
+		vars->player.i -= 1;
 	}
 	else if (key == 97)
 	{
@@ -60,7 +60,6 @@ static int	wasd_hook(int key, t_vars *vars)
 		{
 			if (vars->d_ptr[vars->player.i][vars->player.j - 1] == 'C')
 				vars->d_ptr[vars->player.i][vars->player.j - 1] = '0';
-			vars->player.j -= 1;
 			mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 			vars->player.player_x -= 24;
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
@@ -71,6 +70,7 @@ static int	wasd_hook(int key, t_vars *vars)
 		}
 		if (vars->d_ptr[vars->player.i][vars->player.j - 1] == 'E' && collectible_check(vars->d_ptr) == 1)
 			exit(1);
+		vars->player.j -= 1;
 	}
 	else if (key == 115)
 	{
@@ -78,7 +78,6 @@ static int	wasd_hook(int key, t_vars *vars)
 		{
 			if (vars->d_ptr[vars->player.i + 1][vars->player.j] == 'C')
 				vars->d_ptr[vars->player.i + 1][vars->player.j] = '0';
-			vars->player.i += 1;
 			mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 			vars->player.player_y += 24;
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
@@ -89,6 +88,7 @@ static int	wasd_hook(int key, t_vars *vars)
 		}
 		if (vars->d_ptr[vars->player.i + 1][vars->player.j] == 'E' && collectible_check(vars->d_ptr) == 1)
 			exit(1);
+		vars->player.i += 1;
 	}
 	else if (key == 100)
 	{
@@ -96,7 +96,6 @@ static int	wasd_hook(int key, t_vars *vars)
 		{
 			if (vars->d_ptr[vars->player.i][vars->player.j + 1] == 'C')
 				vars->d_ptr[vars->player.i][vars->player.j + 1] = '0';
-			vars->player.j += 1;
 			mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 			vars->player.player_x += 24;
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
@@ -107,12 +106,12 @@ static int	wasd_hook(int key, t_vars *vars)
 		}
 		if (vars->d_ptr[vars->player.i][vars->player.j + 1] == 'E' && collectible_check(vars->d_ptr) == 1)
 			exit(1);
+		vars->player.j += 1;
 	}
 	else if (key == 65307)
 		exit(1);
 	return 0;
 }
-
 void	player_hooking(t_vars *vars)
 {
 	vars->counter = 0;
