@@ -47,7 +47,7 @@ static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 				storage[3] = 'C';
 			else if (d_ptr[i][j] != '1' && d_ptr[i][j] != '0')
 			{
-				ft_putstr("Invalid map, your map contains wrong elements!");
+				ft_putstr("Error :\nInvalid map, your map contains wrong elements!");
 				exit(1);
 			}
 			j++;	
@@ -57,7 +57,7 @@ static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 	storage[6] = '\0';
 	if (ft_strcmp(storage, "EPXCBB") != 0)
 	{
-		ft_putstr("Invalid map, please check your elements!");
+		ft_putstr("Error :\nInvalid map, please check your elements!");
 		exit(1);
 	}
 	map_parsing(d_ptr, count_y, count_x);
@@ -76,7 +76,7 @@ static void	map_border_check(char	**d_ptr, int count_y, int count_x)
 		{
 			if (d_ptr[i][j] != '1')
 			{
-				ft_putstr("Invalid map, please close your map!\n");
+				ft_putstr("Error :\nInvalid map, please close your map!\n");
 				exit(1);
 			}
 			j++;
@@ -84,7 +84,7 @@ static void	map_border_check(char	**d_ptr, int count_y, int count_x)
 		j = 0;
 		if ((d_ptr[i][0] != '1') || (d_ptr[i][count_x - 1] != '1'))
 		{
-			ft_putstr("Invalid map, please close your map!\n");
+			ft_putstr("Error :\nInvalid map, please close your map!\n");
 			exit(1);
 		}
 		i++;
@@ -109,7 +109,7 @@ static void	map_rect_check(char	*str)
 	//x2 predecremented to account for the \n character!
 	if (x1 != --x2)
 	{
-		ft_putstr("Invalid map, please submit a rectangular map!");
+		ft_putstr("Error :\nInvalid map, please submit a rectangular map!");
 		exit(1);
 	}
 	x1 = 0;
@@ -118,14 +118,14 @@ static void	map_rect_check(char	*str)
 	{
 		if (ft_strlen(d_ptr[x1]) != x2)
 		{
-			ft_putstr("Invalid map, please submit a rectangular map!");
+			ft_putstr("Error :\nInvalid map, please submit a rectangular map!");
 			exit(1);
 		}
 		x1++;
 	}
 	if (x1 == x2)
 	{
-		ft_putstr("Your map is square shaped, please submit a rectangular map!");
+		ft_putstr("Error :\nYour map is square shaped, please submit a rectangular map!");
 		exit(1);
 	}
 	map_border_check(d_ptr, x1, x2);
@@ -138,18 +138,18 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2)
 	{
-		ft_putstr("Invalid arguments, please try again!\n");
+		ft_putstr("Error :\nInvalid arguments, please try again!\n");
 		exit(1);
 	}
 	if (ft_strcmp(ft_strrchr(argv[1], '.'), ".ber") != 0)
 	{
-		ft_putstr("Invalid file extension\n");
+		ft_putstr("Error :\nInvalid file extension\n");
 		exit(1);
 	}
 	int	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
 	{
-		ft_putstr("Invalid map file\n");
+		ft_putstr("Error :\nInvalid map file\n");
 		exit(1);
 	}
 	read_ret = read(fd, argv[1], 10000000);

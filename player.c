@@ -31,8 +31,8 @@ static int	wasd_hook(int key, t_vars *vars)
 	int	height;
 	int 	width;
 
-	floor_img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/Assets/Floor.xpm", &width, &height);
-	wall_img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/Assets/Wall.xpm", &width, &height);
+	floor_img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &width, &height);
+	wall_img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Wall.xpm", &width, &height);
 	mlx_string_put(vars->mlx, vars->win, 5, 15, 0xE49B0F, ft_itoa(vars->counter));
 	//nested player struct inside vars struct to pass the player info to the hook function without violating the mlx_key_hook function prototype.
 	if (key == 119)

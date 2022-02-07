@@ -53,7 +53,7 @@ void	map_parsing(char **d_ptr, int count_y, int count_x)
 	i = 0;
 	cords.y = 0;
 	vars.mlx = mlx_init();
-	vars.backg = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Floor.xpm", &img_width, &img_height);
+	vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &img_width, &img_height);
 	vars.win = mlx_new_window(vars.mlx, count_x * img_width, count_y * img_height, "so_long");
 	while (i < count_y)
 	{
@@ -63,32 +63,32 @@ void	map_parsing(char **d_ptr, int count_y, int count_x)
 		{
 			if (d_ptr[i][j] == '1')
 			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Wall.xpm", &img_width, &img_height);
+				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Wall.xpm", &img_width, &img_height);
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
 			}
 			else if (d_ptr[i][j] == '0')
 			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Floor.xpm", &img_width, &img_height);
+				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &img_width, &img_height);
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
 			}
 			else if (d_ptr[i][j] == 'E')
 			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Door.xpm", &img_width, &img_height);
+				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Door.xpm", &img_width, &img_height);
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
 			}
 			else if (d_ptr[i][j] == 'C')
 			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Sword.xpm", &img_width, &img_height);
+				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Sword.xpm", &img_width, &img_height);
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
 			}
 			else if (d_ptr[i][j] == 'X')
 			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/enemy/1.xpm", &img_width, &img_height);
+				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Enemy.xpm", &img_width, &img_height);
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
 			}
 			else if (d_ptr[i][j] == 'P')
 			{
-				vars.player.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/Assets/Knight.xpm", &img_width, &img_height);
+				vars.player.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Knight.xpm", &img_width, &img_height);
 				vars.player.j = j;
 				vars.player.i = i;
 				mlx_put_image_to_window(vars.mlx, vars.win, vars.player.img, cords.x, cords.y);
