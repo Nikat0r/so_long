@@ -13,13 +13,13 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <mlx.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <mlx.h>
+# include <stdlib.h>
 
-typedef struct{
+typedef struct s_player{
 	int	i;
 	int	j;
 	int	player_y;
@@ -27,31 +27,30 @@ typedef struct{
 	void	*img;
 }	t_player;
 
-typedef struct{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	void	*backg;
-	char	**d_ptr;
-	int	counter;
-	t_player player;	
+typedef struct s_vars{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		**d_ptr;
+	int			counter;
+	t_player	player;	
 }	t_vars;
 
-typedef struct{
+typedef struct s_cords{
 	int	x;
 	int	y;
 }	t_cords;
 
-void	ft_putchar(char	c);
+void	ft_putchar(char c);
 size_t	ft_strlen(const char *str);
 void	ft_putstr(char	*str);
 char	*ft_strrchr(const char *str, int c);
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char *s, char c);
 char	*ft_itoa(int n);
-void	map_parsing(char **d_ptr, int count_y, int count_x);
+void	map_parsing(char **d_ptr, int count_y, int count_x, int i);
 void	player_hooking(t_vars *vars);
 
+char	*map_element_check_2(char **d_ptr, int count_y, int count_x, int i);
+
 #endif
-
-

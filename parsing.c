@@ -40,15 +40,14 @@
 	//mlx_loop(vars->mlx);
 	return 0;
 }*/
-void	map_parsing(char **d_ptr, int count_y, int count_x)
+
+void	map_parsing(char **d_ptr, int count_y, int count_x, int i)
 {
 	t_vars		vars;
 	t_cords		cords;
-
-	int	i;
-	int	j;
-	int	img_height;
-	int	img_width;
+	int		j;
+	int		img_height;
+	int		img_width;
 
 	i = 0;
 	cords.y = 0;
@@ -101,8 +100,8 @@ void	map_parsing(char **d_ptr, int count_y, int count_x)
 		cords.y += img_height;
 		i++;
 	}
-	//passing by reference to change the actual values of the player info to account for the wasd_hook function!
-	//Including d_ptr in vars to be able to pass it to wasd_hook.
+	/*passing by reference to change the actual values of the player info to account for the wasd_hook function!
+	Including d_ptr in vars to be able to pass it to wasd_hook.*/
 	vars.d_ptr = d_ptr;
 	player_hooking(&vars);
 }

@@ -14,53 +14,22 @@
 
 static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 {
-	char	storage[7];
-	int		i;
-	int		j;
-	
-	i = 1;
-	storage[0] = '\0';
-	storage[1] = '\0';
-	storage[2] = '\0';
-	storage[3] = '\0';
-	storage[4] = 'A';
-	storage[5] = 'A';
+	char	*storage;
+	int	i;
 
+	i = 1;
 	while (d_ptr[i])
 	{
-		j = 1;
-		while (i < count_y && j < count_x)
-		{
-			if (d_ptr[i][j] == 'E')
-				storage[0] = 'E';
-			else if (d_ptr[i][j] == 'P')
-			{
-				storage[1] = 'P';
-				storage[4] += 1;
-			}
-			else if (d_ptr[i][j] == 'X')
-			{
-				storage[2] = 'X';
-				storage[5] += 1;
-			}
-			else if (d_ptr[i][j] == 'C')
-				storage[3] = 'C';
-			else if (d_ptr[i][j] != '1' && d_ptr[i][j] != '0')
-			{
-				ft_putstr("Error :\nInvalid map, your map contains wrong elements!");
-				exit(1);
-			}
-			j++;	
-		}
+		storage = map_element_check_2(d_ptr, count_y, count_x, i);
 		i++;
 	}
-	storage[6] = '\0';
 	if (ft_strcmp(storage, "EPXCBB") != 0)
 	{
 		ft_putstr("Error :\nInvalid map, please check your elements!");
 		exit(1);
 	}
-	map_parsing(d_ptr, count_y, count_x);
+	//passing i for the 5 variable norminette rule
+	map_parsing(d_ptr, count_y, count_x, i);
 }
 
 static void	map_border_check(char	**d_ptr, int count_y, int count_x)
@@ -92,6 +61,24 @@ static void	map_border_check(char	**d_ptr, int count_y, int count_x)
 	map_element_check(d_ptr, count_y, count_x);
 }
 
+static void	map_rect_check_2(size_t *x1, size_t x2, char **d_ptr)
+{
+	while (d_ptr[*x1])
+	{
+		if (ft_strlen(d_ptr[*x1]) != x2)
+		{
+			ft_putstr("Error :\nInvalid map, please submit a rectangular map!");
+			exit(1);
+		}
+		*x1 = *x1 + 1;
+	}
+	if (*x1 == x2)
+	{
+		ft_putstr("Error :\nYour map is square shaped, submit a rectangular map\n");
+		exit(1);
+	}
+}
+
 static void	map_rect_check(char	*str)
 {
 	size_t	x1;
@@ -99,6 +86,7 @@ static void	map_rect_check(char	*str)
 	char	*ptr;
 	char	**d_ptr;
 
+	/*x2 predecremented to account for the \n character!*/
 	x1 = 0;
 	x2 = 0;
 	while (str[x1] != '\n')
@@ -106,7 +94,6 @@ static void	map_rect_check(char	*str)
 	ptr = ft_strrchr(str, '\n');
 	while (ptr[x2] != '\0')
 		x2++;
-	//x2 predecremented to account for the \n character!
 	if (x1 != --x2)
 	{
 		ft_putstr("Error :\nInvalid map, please submit a rectangular map!");
@@ -114,28 +101,16 @@ static void	map_rect_check(char	*str)
 	}
 	x1 = 0;
 	d_ptr = ft_split(str, '\n');
-	while (d_ptr[x1])
-	{
-		if (ft_strlen(d_ptr[x1]) != x2)
-		{
-			ft_putstr("Error :\nInvalid map, please submit a rectangular map!");
-			exit(1);
-		}
-		x1++;
-	}
-	if (x1 == x2)
-	{
-		ft_putstr("Error :\nYour map is square shaped, please submit a rectangular map!");
-		exit(1);
-	}
+	map_rect_check_2(&x1, x2, d_ptr);
 	map_border_check(d_ptr, x1, x2);
-	//x1 predecremented because it's gonna be used as an index!
 }
 
 int	main(int argc, char *argv[])
 {
-	int read_ret;
+	int	read_ret;
+	int	fd;
 
+	fd = open(argv[1], O_RDWR);
 	if (argc != 2)
 	{
 		ft_putstr("Error :\nInvalid arguments, please try again!\n");
@@ -146,7 +121,6 @@ int	main(int argc, char *argv[])
 		ft_putstr("Error :\nInvalid file extension\n");
 		exit(1);
 	}
-	int	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
 	{
 		ft_putstr("Error :\nInvalid map file\n");

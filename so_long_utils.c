@@ -21,7 +21,8 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-void	ft_putchar(char	c)
+
+void	ft_putchar(char c)
 {
 	write (1, &c, 1);
 }
@@ -77,4 +78,3 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (0);
 }
-
