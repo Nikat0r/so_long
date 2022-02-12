@@ -40,65 +40,72 @@
 	//mlx_loop(vars->mlx);
 	return 0;
 }*/
+static void	map_parsing_3(char **d_ptr, t_vars *vars, t_parsing *parsing)
+{
+	if (d_ptr[parsing->i][parsing->j] == 'C')
+	{
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Sword.xpm", &parsing->width, &parsing->height);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
+	}
+	else if (d_ptr[parsing->i][parsing->j] == 'X')
+	{
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Enemy.xpm", &parsing->width, &parsing->height);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
+	}
+	else if (d_ptr[parsing->i][parsing->j] == 'P')
+	{
+		vars->player.img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Knight.xpm", &parsing->width, &parsing->height);
+		vars->player.j = parsing->j;
+		vars->player.i = parsing->i;
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, parsing->x, parsing->y);
+		vars->player.player_x = parsing->x;
+		vars->player.player_y = parsing->y;
+	}
+}
 
-void	map_parsing(char **d_ptr, int count_y, int count_x, int i)
+static void	map_parsing_2(char **d_ptr, t_vars *vars, int count_x, t_parsing *parsing)
+{
+	while (parsing->j < count_x)
+	{
+		if (d_ptr[parsing->i][parsing->j] == '1')
+		{
+			vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Wall.xpm", &parsing->width, &parsing->height);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
+		}
+		else if (d_ptr[parsing->i][parsing->j] == '0')
+		{
+			vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &parsing->width, &parsing->height);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
+		}
+		else if (d_ptr[parsing->i][parsing->j] == 'E')
+		{
+			vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Door.xpm", &parsing->width, &parsing->height);
+			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
+		}
+		else
+			map_parsing_3(d_ptr, vars, parsing);
+		parsing->j++;
+		parsing->x += parsing->width;
+	}
+}
+
+void	map_parsing(char **d_ptr, int count_y, int count_x)
 {
 	t_vars		vars;
-	t_cords		cords;
-	int		j;
-	int		img_height;
-	int		img_width;
+	t_parsing	parsing;
 
-	i = 0;
-	cords.y = 0;
+	parsing.i = 0;
+	parsing.y = 0;
 	vars.mlx = mlx_init();
-	vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &img_width, &img_height);
-	vars.win = mlx_new_window(vars.mlx, count_x * img_width, count_y * img_height, "so_long");
-	while (i < count_y)
+	vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &parsing.width, &parsing.height);
+	vars.win = mlx_new_window(vars.mlx, count_x * parsing.width, count_y * parsing.height, "so_long");
+	while (parsing.i < count_y)
 	{
-		j = 0;
-		cords.x = 0;
-		while (j < count_x)
-		{
-			if (d_ptr[i][j] == '1')
-			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Wall.xpm", &img_width, &img_height);
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
-			}
-			else if (d_ptr[i][j] == '0')
-			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &img_width, &img_height);
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
-			}
-			else if (d_ptr[i][j] == 'E')
-			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Door.xpm", &img_width, &img_height);
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
-			}
-			else if (d_ptr[i][j] == 'C')
-			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Sword.xpm", &img_width, &img_height);
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
-			}
-			else if (d_ptr[i][j] == 'X')
-			{
-				vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Enemy.xpm", &img_width, &img_height);
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.img, cords.x, cords.y);
-			}
-			else if (d_ptr[i][j] == 'P')
-			{
-				vars.player.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Knight.xpm", &img_width, &img_height);
-				vars.player.j = j;
-				vars.player.i = i;
-				mlx_put_image_to_window(vars.mlx, vars.win, vars.player.img, cords.x, cords.y);
-				vars.player.player_x = cords.x;
-				vars.player.player_y = cords.y;
-			}
-			j++;
-			cords.x += img_width;
-		}
-		cords.y += img_height;
-		i++;
+		parsing.j = 0;
+		parsing.x = 0;
+		map_parsing_2(d_ptr, &vars, count_x, &parsing);
+		parsing.y += parsing.height;
+		parsing.i++;
 	}
 	/*passing by reference to change the actual values of the player info to account for the wasd_hook function!
 	Including d_ptr in vars to be able to pass it to wasd_hook.*/

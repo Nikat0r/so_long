@@ -28,8 +28,7 @@ static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 		ft_putstr("Error :\nInvalid map, please check your elements!");
 		exit(1);
 	}
-	//passing i for the 5 variable norminette rule
-	map_parsing(d_ptr, count_y, count_x, i);
+	map_parsing(d_ptr, count_y, count_x);
 }
 
 static void	map_border_check(char	**d_ptr, int count_y, int count_x)
