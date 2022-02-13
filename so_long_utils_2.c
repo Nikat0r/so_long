@@ -56,3 +56,12 @@ char	*map_element_check_2(char **d_ptr, int count_y, int count_x, int i)
 	}
 	return (storage);
 }
+
+void	declarations(t_vars *vars)
+{
+	vars->enemy.pos_up = vars->enemy.y - 24;
+	vars->enemy.pos_down = vars->enemy.y + 24;
+	vars->enemy.pos_mid = vars->enemy.y;
+	vars->enemy.counter = 0;
+	vars->enemy.switch_int = -1;
+}

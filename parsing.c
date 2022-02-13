@@ -1,45 +1,5 @@
 #include "so_long.h"
 
-/*static int	enemy_movement(t_vars *vars)
-{
-	int	height;
-	int	width;
-	int 	pos_up;
-	int	pos_down;
-
-	vars->enemy.img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/enemy/1.xpm", &width, &height);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
-	vars->backg = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/Assets/Floor.xpm", &width, &height);
-	pos_up = vars->enemy.y - height;
-	pos_down = vars->enemy.y + height;
-	if ((vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == 'C' || vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == '0') && (vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == 'C' || vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == '0'))
-	{
-		while (vars->enemy.y <= pos_down)
-		{
-			vars->enemy.y += height;
-			usleep(1000);
-			//clearing the image before and after to smoothen the movement
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y - height);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
-			mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y - height);
-			if (vars->enemy.y == pos_down)
-			{
-				while (vars->enemy.y >= pos_up)
-				{
-					vars->enemy.y -= height;
-					usleep(1000);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y + height);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
-					mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y + height);
-					if (vars->enemy.y == pos_up)
-						break;
-				}
-			}
-		}
-	}
-	//mlx_loop(vars->mlx);
-	return 0;
-}*/
 static void	map_parsing_3(char **d_ptr, t_vars *vars, t_parsing *parsing)
 {
 	if (d_ptr[parsing->i][parsing->j] == 'C')
@@ -48,9 +8,14 @@ static void	map_parsing_3(char **d_ptr, t_vars *vars, t_parsing *parsing)
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
 	}
 	else if (d_ptr[parsing->i][parsing->j] == 'X')
-	{
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Enemy.xpm", &parsing->width, &parsing->height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
+	{	
+		vars->enemy.i = parsing->i;
+		vars->enemy.j = parsing->j;
+		vars->enemy.x = parsing->x;
+		vars->enemy.y = parsing->y;
+		declarations(vars);
+		vars->enemy.img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Enemy.xpm", &parsing->width, &parsing->height);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, parsing->x, parsing->y);
 	}
 	else if (d_ptr[parsing->i][parsing->j] == 'P')
 	{

@@ -27,13 +27,27 @@ typedef struct s_player{
 	void	*img;
 }	t_player;
 
+typedef struct s_enemy{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+	int	pos_down;
+	int	pos_up;
+	int	pos_mid;
+	int	counter;
+	int	switch_int;
+	void	*img;
+}	t_enemy;
 typedef struct s_vars{
 	void		*mlx;
 	void		*win;
 	void		*img;
+	void		*backg;
 	char		**d_ptr;
 	int			counter;
-	t_player	player;	
+	t_player	player;
+	t_enemy		enemy;
 }	t_vars;
 
 typedef struct s_parsing{
@@ -59,5 +73,7 @@ void	w_hook(t_vars *vars, void *floor_img, void *wall_img);
 void	a_hook(t_vars *vars, void *floor_img, void *wall_img);
 void	s_hook(t_vars *vars, void *floor_img, void *wall_img);
 void	d_hook(t_vars *vars, void *floor_img, void *wall_img);
+void	enemy_movement(t_vars *vars);
+void	declarations(t_vars *vars);
 
 #endif
