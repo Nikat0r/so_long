@@ -4,7 +4,7 @@ static void	map_parsing_3(char **d_ptr, t_vars *vars, t_parsing *parsing)
 {
 	if (d_ptr[parsing->i][parsing->j] == 'C')
 	{
-		vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Sword.xpm", &parsing->width, &parsing->height);
+		vars->img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Sword.xpm", &parsing->width, &parsing->height);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
 	}
 	else if (d_ptr[parsing->i][parsing->j] == 'X')
@@ -14,12 +14,12 @@ static void	map_parsing_3(char **d_ptr, t_vars *vars, t_parsing *parsing)
 		vars->enemy.x = parsing->x;
 		vars->enemy.y = parsing->y;
 		declarations(vars);
-		vars->enemy.img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Enemy.xpm", &parsing->width, &parsing->height);
+		vars->enemy.img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Enemy.xpm", &parsing->width, &parsing->height);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, parsing->x, parsing->y);
 	}
 	else if (d_ptr[parsing->i][parsing->j] == 'P')
 	{
-		vars->player.img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Knight.xpm", &parsing->width, &parsing->height);
+		vars->player.img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Knight.xpm", &parsing->width, &parsing->height);
 		vars->player.j = parsing->j;
 		vars->player.i = parsing->i;
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, parsing->x, parsing->y);
@@ -34,17 +34,17 @@ static void	map_parsing_2(char **d_ptr, t_vars *vars, int count_x, t_parsing *pa
 	{
 		if (d_ptr[parsing->i][parsing->j] == '1')
 		{
-			vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Wall.xpm", &parsing->width, &parsing->height);
+			vars->img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Wall.xpm", &parsing->width, &parsing->height);
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
 		}
 		else if (d_ptr[parsing->i][parsing->j] == '0')
 		{
-			vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &parsing->width, &parsing->height);
+			vars->img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Floor.xpm", &parsing->width, &parsing->height);
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
 		}
 		else if (d_ptr[parsing->i][parsing->j] == 'E')
 		{
-			vars->img = mlx_xpm_file_to_image(vars->mlx, "/home/nikator/Desktop/so_long/Assets/Door.xpm", &parsing->width, &parsing->height);
+			vars->img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Door.xpm", &parsing->width, &parsing->height);
 			mlx_put_image_to_window(vars->mlx, vars->win, vars->img, parsing->x, parsing->y);
 		}
 		else
@@ -62,7 +62,7 @@ void	map_parsing(char **d_ptr, int count_y, int count_x)
 	parsing.i = 0;
 	parsing.y = 0;
 	vars.mlx = mlx_init();
-	vars.img = mlx_xpm_file_to_image(vars.mlx, "/home/nikator/Desktop/so_long/Assets/Floor.xpm", &parsing.width, &parsing.height);
+	vars.img = mlx_xpm_file_to_image(vars.mlx, "/Users/ababa/Cursus/so_long/Assets/Floor.xpm", &parsing.width, &parsing.height);
 	vars.win = mlx_new_window(vars.mlx, count_x * parsing.width, count_y * parsing.height, "so_long");
 	while (parsing.i < count_y)
 	{

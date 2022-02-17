@@ -1,6 +1,6 @@
 CC = cc
 
-FLAGS = -L/usr/local/lib -lmlx -lXext -lX11 -lm -lz -Wall -Werror -Wextra
+FLAGS = -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit -Wall -Werror -Wextra 
 
 FILES = so_long.c so_long_utils.c so_long_utils_2.c ft_split.c ft_itoa.c parsing.c player.c hooking.c enemy.c
 

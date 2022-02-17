@@ -6,7 +6,7 @@
 /*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:09:07 by ababa             #+#    #+#             */
-/*   Updated: 2021/12/24 17:23:20 by ababa            ###   ########.fr       */
+/*   Updated: 2022/02/17 14:27:47 by ababa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 	}
 	if (ft_strcmp(storage, "EPXCBB") != 0)
 	{
-		ft_putstr("Error :\nInvalid map, please check your elements!");
+		ft_putstr("Error :\nInvalid map, please check your elements!\n");
 		exit(1);
 	}
 	free(storage);
@@ -67,7 +67,7 @@ static void	map_rect_check_2(size_t *x1, size_t x2, char **d_ptr)
 	{
 		if (ft_strlen(d_ptr[*x1]) != x2)
 		{
-			ft_putstr("Error :\nInvalid map, please submit a rectangular map!");
+			ft_putstr("Error :\nInvalid map, please submit a rectangular map!\n");
 			exit(1);
 		}
 		*x1 = *x1 + 1;
@@ -96,7 +96,7 @@ static void	map_rect_check(char	*str)
 		x2++;
 	if (x1 != --x2)
 	{
-		ft_putstr("Error :\nInvalid map, please submit a rectangular map!");
+		ft_putstr("Error :\nInvalid map, please submit a rectangular map!\n");
 		exit(1);
 	}
 	x1 = 0;

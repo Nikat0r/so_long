@@ -13,7 +13,7 @@ static char	*storage_array(void)
 	storage[3] = '\0';
 	storage[4] = 'A';
 	storage[5] = 'A';
-	storage[7] = '\0';
+	storage[6] = '\0';
 	return (storage);
 }
 
@@ -64,4 +64,14 @@ void	declarations(t_vars *vars)
 	vars->enemy.pos_mid = vars->enemy.y;
 	vars->enemy.counter = 0;
 	vars->enemy.switch_int = -1;
+}
+
+void	sprite_animation(t_vars *vars)
+{
+	int	width;
+	int	height;
+
+	vars->wall_img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Wall.xpm", &width, &height);
+	vars->anim.img1 = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/1.xpm", &width, &height);
+	vars->anim.img2 = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/attack.xpm", &width, &height);
 }

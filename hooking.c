@@ -23,7 +23,7 @@ static int	collectible_check(char **d_ptr)
 void	w_hook(t_vars *vars, void *floor_img, void *wall_img)
 {
 	if ((vars->d_ptr[vars->player.i - 1][vars->player.j] == 'E' && collectible_check(vars->d_ptr) == 1) || vars->d_ptr[vars->player.i - 1][vars->player.j] == 'X')
-		exit(1);
+		exit(0);
 	if (vars->d_ptr[vars->player.i - 1][vars->player.j] != '1' && vars->d_ptr[vars->player.i - 1][vars->player.j] != 'E')
 	{	
 		vars->player.i -= 1;
@@ -31,11 +31,14 @@ void	w_hook(t_vars *vars, void *floor_img, void *wall_img)
 		vars->player.player_y -= 24;
 		vars->d_ptr[vars->player.i + 1][vars->player.j] = '0';
 		vars->d_ptr[vars->player.i][vars->player.j] = 'P';
+		mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
 		vars->counter++;
+		vars->ptr = ft_itoa(vars->counter);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 0, 0);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 24, 0);
-		mlx_string_put(vars->mlx, vars->win, 5, 15, 0xE49B0F, ft_itoa(vars->counter));
+		mlx_string_put(vars->mlx, vars->win, 5, 5, 0xE49B0F, vars->ptr);
+		free(vars->ptr);
 		enemy_movement(vars);
 	}
 }
@@ -43,26 +46,29 @@ void	w_hook(t_vars *vars, void *floor_img, void *wall_img)
 void	a_hook(t_vars *vars, void *floor_img, void *wall_img)
 {
 	if ((vars->d_ptr[vars->player.i][vars->player.j - 1] == 'E' && collectible_check(vars->d_ptr) == 1) || vars->d_ptr[vars->player.i][vars->player.j - 1] == 'X')
-		exit(1);
+		exit(0);
 	if (vars->d_ptr[vars->player.i][vars->player.j - 1] != '1' && vars->d_ptr[vars->player.i][vars->player.j - 1] != 'E')
-	{
+	{	
 		vars->player.j -= 1;
 		mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 		vars->player.player_x -= 24;
 		vars->d_ptr[vars->player.i][vars->player.j + 1] = '0';
 		vars->d_ptr[vars->player.i][vars->player.j] = 'P';
+		mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
 		vars->counter++;
+		vars->ptr = ft_itoa(vars->counter);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 0, 0);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 24, 0);
-		mlx_string_put(vars->mlx, vars->win, 5, 15, 0xE49B0F, ft_itoa(vars->counter));
+		mlx_string_put(vars->mlx, vars->win, 5, 5, 0xE49B0F, vars->ptr);
+		free(vars->ptr);
 		enemy_movement(vars);
 	}
 }
 void	s_hook(t_vars *vars, void *floor_img, void *wall_img)
 {
 	if ((vars->d_ptr[vars->player.i + 1][vars->player.j] == 'E' && collectible_check(vars->d_ptr) == 1) || vars->d_ptr[vars->player.i + 1][vars->player.j] == 'X')
-		exit(1);
+		exit(0);
 	if (vars->d_ptr[vars->player.i + 1][vars->player.j] != '1' && vars->d_ptr[vars->player.i + 1][vars->player.j] != 'E')
 	{		
 		vars->player.i += 1;
@@ -70,18 +76,21 @@ void	s_hook(t_vars *vars, void *floor_img, void *wall_img)
 		vars->player.player_y += 24;
 		vars->d_ptr[vars->player.i - 1][vars->player.j] = '0';
 		vars->d_ptr[vars->player.i][vars->player.j] = 'P';
+		mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
 		vars->counter++;
+		vars->ptr = ft_itoa(vars->counter);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 0, 0);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 24, 0);
-		mlx_string_put(vars->mlx, vars->win, 5, 15, 0xE49B0F, ft_itoa(vars->counter));
+		mlx_string_put(vars->mlx, vars->win, 5, 5, 0xE49B0F, vars->ptr);
+		free(vars->ptr);
 		enemy_movement(vars);
 	}	
 }
 void	d_hook(t_vars *vars, void *floor_img, void *wall_img)
-{
+{	
 	if ((vars->d_ptr[vars->player.i][vars->player.j + 1] == 'E' && collectible_check(vars->d_ptr) == 1) || vars->d_ptr[vars->player.i][vars->player.j + 1] == 'X')
-		exit(1);	
+		exit(0);	
 	if (vars->d_ptr[vars->player.i][vars->player.j + 1] != '1' && vars->d_ptr[vars->player.i][vars->player.j + 1] != 'E')
 	{
 		vars->player.j += 1;
@@ -89,11 +98,14 @@ void	d_hook(t_vars *vars, void *floor_img, void *wall_img)
 		vars->player.player_x += 24;
 		vars->d_ptr[vars->player.i][vars->player.j - 1] = '0';
 		vars->d_ptr[vars->player.i][vars->player.j] = 'P';
+		mlx_put_image_to_window(vars->mlx, vars->win, floor_img, vars->player.player_x, vars->player.player_y);
 		mlx_put_image_to_window(vars->mlx, vars->win, vars->player.img, vars->player.player_x, vars->player.player_y);
 		vars->counter++;
+		vars->ptr = ft_itoa(vars->counter);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 0, 0);
 		mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 24, 0);
-		mlx_string_put(vars->mlx, vars->win, 5, 15, 0xE49B0F, ft_itoa(vars->counter));
+		mlx_string_put(vars->mlx, vars->win, 5, 5, 0xE49B0F, vars->ptr);
+		free(vars->ptr);
 		enemy_movement(vars);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:14:29 by ababa             #+#    #+#             */
-/*   Updated: 2021/12/24 11:25:22 by ababa            ###   ########.fr       */
+/*   Updated: 2022/02/17 17:51:10 by ababa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ typedef struct s_player{
 	void	*img;
 }	t_player;
 
+typedef struct s_anim{
+	void	*img1;	
+	void	*img2;
+}	t_anim;
+
 typedef struct s_enemy{
 	int	i;
 	int	j;
@@ -39,6 +44,7 @@ typedef struct s_enemy{
 	int	switch_int;
 	void	*img;
 }	t_enemy;
+
 typedef struct s_vars{
 	void		*mlx;
 	void		*win;
@@ -46,6 +52,9 @@ typedef struct s_vars{
 	void		*backg;
 	char		**d_ptr;
 	int			counter;
+	char		*ptr;
+	void		*wall_img;
+	t_anim		anim;
 	t_player	player;
 	t_enemy		enemy;
 }	t_vars;
@@ -75,5 +84,6 @@ void	s_hook(t_vars *vars, void *floor_img, void *wall_img);
 void	d_hook(t_vars *vars, void *floor_img, void *wall_img);
 void	enemy_movement(t_vars *vars);
 void	declarations(t_vars *vars);
+void	sprite_animation(t_vars *vars);
 
 #endif
