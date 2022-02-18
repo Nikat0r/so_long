@@ -6,7 +6,7 @@
 /*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:09:07 by ababa             #+#    #+#             */
-/*   Updated: 2022/02/17 14:27:47 by ababa            ###   ########.fr       */
+/*   Updated: 2022/02/18 11:19:15 by ababa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	map_element_check(char	**d_ptr, int count_y, int count_x)
 {
 	char	*storage;
-	int	i;
+	int		i;
 
 	i = 1;
 	while (d_ptr[i])
@@ -74,10 +74,12 @@ static void	map_rect_check_2(size_t *x1, size_t x2, char **d_ptr)
 	}
 	if (*x1 == x2)
 	{
-		ft_putstr("Error :\nYour map is square shaped, submit a rectangular map\n");
+		ft_putstr("Error :\nYour map is a square, submit a rectangular map\n");
 		exit(1);
 	}
 }
+
+	/*x2 predecremented to account for the \n character!*/
 
 static void	map_rect_check(char	*str)
 {
@@ -86,7 +88,6 @@ static void	map_rect_check(char	*str)
 	char	*ptr;
 	char	**d_ptr;
 
-	/*x2 predecremented to account for the \n character!*/
 	x1 = 0;
 	x2 = 0;
 	while (str[x1] != '\n')

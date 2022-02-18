@@ -6,7 +6,7 @@
 /*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 13:14:29 by ababa             #+#    #+#             */
-/*   Updated: 2022/02/17 17:51:10 by ababa            ###   ########.fr       */
+/*   Updated: 2022/02/18 11:08:55 by ababa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,43 +20,44 @@
 # include <stdlib.h>
 
 typedef struct s_player{
-	int	i;
-	int	j;
-	int	player_y;
-	int	player_x;
+	int		i;
+	int		j;
+	int		y;
+	int		x;
 	void	*img;
 }	t_player;
 
-typedef struct s_anim{
-	void	*img1;	
-	void	*img2;
-}	t_anim;
+typedef struct s_a{
+	void	*f1;	
+	void	*f2;
+}	t_a;
 
 typedef struct s_enemy{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-	int	pos_down;
-	int	pos_up;
-	int	pos_mid;
-	int	counter;
-	int	switch_int;
+	int		i;
+	int		j;
+	int		x;
+	int		y;
+	int		pos_down;
+	int		pos_up;
+	int		pos_mid;
+	int		counter;
+	int		s_i;
 	void	*img;
 }	t_enemy;
 
 typedef struct s_vars{
 	void		*mlx;
 	void		*win;
-	void		*img;
+	void		*i;
 	void		*backg;
 	char		**d_ptr;
 	int			counter;
 	char		*ptr;
-	void		*wall_img;
-	t_anim		anim;
-	t_player	player;
-	t_enemy		enemy;
+	void		*wall;
+	void		*f;
+	t_a			a;
+	t_player	p;
+	t_enemy		e;
 }	t_vars;
 
 typedef struct s_parsing{
@@ -64,8 +65,8 @@ typedef struct s_parsing{
 	int	j;
 	int	x;
 	int	y;
-	int	width;
-	int	height;
+	int	w;
+	int	h;
 }	t_parsing;
 void	ft_putchar(char c);
 size_t	ft_strlen(const char *str);

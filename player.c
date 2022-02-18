@@ -6,7 +6,7 @@
 /*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:29:58 by ababa             #+#    #+#             */
-/*   Updated: 2022/02/17 17:55:00 by ababa            ###   ########.fr       */
+/*   Updated: 2022/02/17 18:19:48 by ababa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,31 @@ static int	button_hook(void)
 {
 	exit(0);
 }
+	/*nested player struct inside vars struct to pass the player info to the 
+	 hook function without violating the mlx_key_hook function prototype.*/
 
 static int	wasd_hook(int key, t_vars *vars)
 {
-	void	*floor_img;
-	void	*wall_img;
+	void	*f;
+	void	*w;
 	int		height;
 	int		width;
 
-	floor_img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Floor.xpm", &width, &height);
-	wall_img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Wall.xpm", &width, &height);
+	f = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/f.xpm", &width, &height);
+	w = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/w.xpm", &width, &height);
 	vars->ptr = ft_itoa(vars->counter);
-	mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 0, 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, wall_img, 24, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, w, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, w, 24, 0);
 	mlx_string_put(vars->mlx, vars->win, 5, 5, 0xE49B0F, vars->ptr);
 	free(vars->ptr);
-	//nested player struct inside vars struct to pass the player info to the hook function without violating the mlx_key_hook function prototype.
 	if (key == 13)
-		w_hook(vars, floor_img, wall_img);
+		w_hook(vars, f, w);
 	else if (key == 0)
-		a_hook(vars, floor_img, wall_img);
+		a_hook(vars, f, w);
 	else if (key == 1)
-		s_hook(vars, floor_img, wall_img);
+		s_hook(vars, f, w);
 	else if (key == 2)
-		d_hook(vars, floor_img, wall_img);
+		d_hook(vars, f, w);
 	else if (key == 53)
 		exit(0);
 	return (0);
@@ -52,13 +53,13 @@ static int	animation(t_vars *vars)
 	sprite_animation(vars);
 	if (counter <= 10)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->wall_img, 48, 0);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->anim.img1, 48, 0);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->wall, 48, 0);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->a.f1, 48, 0);
 	}	
 	else if (counter <= 20)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->wall_img, 48, 0);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->anim.img2, 48, 0);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->wall, 48, 0);
+		mlx_put_image_to_window(vars->mlx, vars->win, vars->a.f2, 48, 0);
 	}
 	if (counter == 20)
 		counter = 0;

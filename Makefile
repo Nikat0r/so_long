@@ -4,7 +4,7 @@ FLAGS = -L/usr/local/lib -lmlx -framework OpenGL -framework AppKit -Wall -Werror
 
 FILES = so_long.c so_long_utils.c so_long_utils_2.c ft_split.c ft_itoa.c parsing.c player.c hooking.c enemy.c
 
-FILES_BONUS = bonus/so_long_bonus.c bonus/so_long_utils.c bonus/so_long_utils_2.c bonus/ft_split.c bonus/ft_itoa.c bonus/parsing_bonus.c bonus/player_bonus.c bonus/hooking_bonus.c
+FILES_BONUS = bonus/so_long_bonus.c bonus/so_long_utils.c bonus/so_long_utils_2.c bonus/ft_split.c bonus/ft_itoa.c bonus/parsing_bonus.c bonus/player_bonus.c bonus/hooking_bonus.c bonus/enemy_bonus.c
 
 NAME = so_long
 

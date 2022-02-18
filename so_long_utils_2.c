@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_utils_2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/17 17:59:17 by ababa             #+#    #+#             */
+/*   Updated: 2022/02/18 11:12:54 by ababa            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static char	*storage_array(void)
@@ -40,11 +52,13 @@ static void	if_conditions(char **d_ptr, int i, int j, char *storage)
 	}
 }
 
+	/*static for the NULL initialization for the if statement to avoid 
+	  reinitialzing storage each time the function gets called*/
+
 char	*map_element_check_2(char **d_ptr, int count_y, int count_x, int i)
 {
-	//static for the NULL initialization for the if statement to avoid reintizializing storage each time the function gets called
 	static char	*storage;
-	int		j;
+	int			j;
 
 	if (!storage)
 		storage = storage_array();
@@ -59,19 +73,21 @@ char	*map_element_check_2(char **d_ptr, int count_y, int count_x, int i)
 
 void	declarations(t_vars *vars)
 {
-	vars->enemy.pos_up = vars->enemy.y - 24;
-	vars->enemy.pos_down = vars->enemy.y + 24;
-	vars->enemy.pos_mid = vars->enemy.y;
-	vars->enemy.counter = 0;
-	vars->enemy.switch_int = -1;
+	vars->e.pos_up = vars->e.y - 24;
+	vars->e.pos_down = vars->e.y + 24;
+	vars->e.pos_mid = vars->e.y;
+	vars->e.counter = 0;
+	vars->e.s_i = -1;
 }
+
+	/*a is the animation struct and f1/f2 are the two frames*/
 
 void	sprite_animation(t_vars *vars)
 {
-	int	width;
-	int	height;
+	int	w;
+	int	h;
 
-	vars->wall_img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Wall.xpm", &width, &height);
-	vars->anim.img1 = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/1.xpm", &width, &height);
-	vars->anim.img2 = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/attack.xpm", &width, &height);
+	vars->wall = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/w.xpm", &w, &h);
+	vars->a.f1 = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/1.xpm", &w, &h);
+	vars->a.f2 = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/a.xpm", &w, &h);
 }

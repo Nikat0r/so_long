@@ -1,134 +1,153 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   enemy.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ababa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/18 10:54:10 by ababa             #+#    #+#             */
+/*   Updated: 2022/02/18 11:12:18 by ababa            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-static void	top_blocked(t_vars *vars, int height)
+static void	top_blocked(t_vars *v, int h)
 {
-	vars->enemy.switch_int = 1;
-	if (vars->enemy.y == vars->enemy.pos_down)
+	v->e.s_i = 1;
+	if (v->e.y == v->e.pos_down)
 	{
-		if (vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i - 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y -= height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i--;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y + height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
+		v->e.y -= h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i--;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y + h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
 	}
-	else if (vars->enemy.y == vars->enemy.pos_mid)
+	else if (v->e.y == v->e.pos_mid)
 	{
-		if (vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i + 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y += height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i++;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y - height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
+		v->e.y += h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i++;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y - h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
 	}
 }
 
-static void	bot_blocked(t_vars *vars, int height)
+static void	bot_blocked(t_vars *v, int h)
 {
-	vars->enemy.switch_int = 2;
-	if (vars->enemy.y == vars->enemy.pos_up)
+	v->e.s_i = 2;
+	if (v->e.y == v->e.pos_up)
 	{	
-		if (vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i + 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y += height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i++;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y - height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
+		v->e.y += h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i++;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y - h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
 	}
-	else if (vars->enemy.y == vars->enemy.pos_mid)
+	else if (v->e.y == v->e.pos_mid)
 	{		
-		if (vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i - 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y -= height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i--;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y + height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
+		v->e.y -= h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i--;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y + h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
 	}
 }
 
-static void	enemy_pos_mid(t_vars *vars, int height)
+static void	enemy_pos_mid(t_vars *v, int h)
 {
-	if (vars->enemy.counter == 1)
+	if (v->e.counter == 1)
 	{	
-		if (vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i - 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y -= height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i--;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y + height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
-		vars->enemy.counter = 0;		
+		v->e.y -= h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i--;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y + h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
+		v->e.counter = 0;
 	}
-	else if (vars->enemy.counter == 0)
+	else if (v->e.counter == 0)
 	{		
-		if (vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i + 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y += height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i++;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y - height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
-		vars->enemy.counter = 1;
+		v->e.y += h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i++;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y - h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
+		v->e.counter = 1;
 	}
-
 }
 
-static void	enemy_pos_up_down(t_vars *vars, int height)
+static void	enemy_pos_up_down(t_vars *v, int h)
 {
-	if (vars->enemy.y == vars->enemy.pos_down)
+	if (v->e.y == v->e.pos_down)
 	{			
-		if (vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i - 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y -= height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i--;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y + height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
+		v->e.y -= h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i--;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y + h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
 	}
-	else if (vars->enemy.y == vars->enemy.pos_up)
+	else if (v->e.y == v->e.pos_up)
 	{		
-		if (vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == 'P')
+		if (v->d_ptr[v->e.i + 1][v->e.j] == 'P')
 			exit(1);
-		vars->enemy.y += height;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = '0';
-		vars->enemy.i++;
-		vars->d_ptr[vars->enemy.i][vars->enemy.j] = 'X';
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->backg, vars->enemy.x, vars->enemy.y - height);
-		mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
+		v->e.y += h;
+		v->d_ptr[v->e.i][v->e.j] = '0';
+		v->e.i++;
+		v->d_ptr[v->e.i][v->e.j] = 'X';
+		mlx_put_image_to_window(v->mlx, v->win, v->backg, v->e.x, v->e.y - h);
+		mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
 	}
 }
+	/*switch_int is to avoid the third condition from being true
+	after moving the X from its original position
+	adding switch_int conditions to ensure 
+	only one condition is gonna get satisfied*/
 
-void	enemy_movement(t_vars *vars)
+void	enemy_movement(t_vars *v)
 {
-	int	height;
-	int	width;
+	int	h;
+	int	w;
 
-	//switch_int is to avoid the third condition from being true after moving the X from its original position
-	//adding switch_int conditions to ensure only one condition is gonna get satisfied 
-	vars->enemy.img = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Enemy.xpm", &width, &height);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->enemy.img, vars->enemy.x, vars->enemy.y);
-	vars->backg = mlx_xpm_file_to_image(vars->mlx, "/Users/ababa/Cursus/so_long/Assets/Floor.xpm", &width, &height);
-	if ((vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] != '0' && vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == '0' && vars->enemy.switch_int != 0) || vars->enemy.switch_int == 1)
-		top_blocked(vars, height);
-	else if ((vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == '0' && vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] != '0' && vars->enemy.switch_int != 0) || vars->enemy.switch_int == 2)
-		bot_blocked(vars, height);
-	else if ((vars->d_ptr[vars->enemy.i - 1][vars->enemy.j] == '0' && vars->d_ptr[vars->enemy.i + 1][vars->enemy.j] == '0' && vars->enemy.switch_int != 1 && vars->enemy.switch_int != 2) || vars->enemy.switch_int == 0)
+	v->e.img = mlx_xpm_file_to_image(v->mlx, "./i/e.xpm", &w, &h);
+	mlx_put_image_to_window(v->mlx, v->win, v->e.img, v->e.x, v->e.y);
+	v->backg = mlx_xpm_file_to_image(v->mlx, "./i/f.xpm", &w, &h);
+	if ((v->d_ptr[v->e.i - 1][v->e.j] != '0'
+		&& v->d_ptr[v->e.i + 1][v->e.j] == '0'
+		&& v->e.s_i != 0) || v->e.s_i == 1)
+		top_blocked(v, h);
+	else if ((v->d_ptr[v->e.i - 1][v->e.j] == '0'
+		&& v->d_ptr[v->e.i + 1][v->e.j] != '0'
+		&& v->e.s_i != 0) || v->e.s_i == 2)
+		bot_blocked(v, h);
+	else if ((v->d_ptr[v->e.i - 1][v->e.j] == '0'
+		&& v->d_ptr[v->e.i + 1][v->e.j] == '0'
+		&& v->e.s_i != 1 && v->e.s_i != 2) || v->e.s_i == 0)
 	{
-		vars->enemy.switch_int = 0;
-		if (vars->enemy.y == vars->enemy.pos_mid)
-			enemy_pos_mid(vars, height);
-		else if (vars->enemy.y == vars->enemy.pos_down || vars->enemy.y == vars->enemy.pos_up)
-			enemy_pos_up_down(vars, height);
+		v->e.s_i = 0;
+		if (v->e.y == v->e.pos_mid)
+			enemy_pos_mid(v, h);
+		else if (v->e.y == v->e.pos_down || v->e.y == v->e.pos_up)
+			enemy_pos_up_down(v, h);
 	}
 }
